@@ -34,6 +34,10 @@ listener.onMouseClicked = evt => {
   console.log(`Gewählt: ${c.title}`);
   api.repaint();
 };
+listener.onCellActivated = evt => {
+  const c = evt.value as Cover;
+  console.log(`Geöffnet: ${c.title} (${evt.source})`);
+};
 
 const host =
   document.querySelector<HTMLDivElement>("#grid")!;
