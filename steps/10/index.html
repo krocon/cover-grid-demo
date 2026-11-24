@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cover Grid</title>
+  </head>
+  <body>
+    <div class="bar">
+      <input id="search" type="search" placeholder="Suchen …" />
+      <select id="sort">
+        <option value="id">Sammlung</option>
+        <option value="title">Titel</option>
+        <option value="year">Neueste zuerst</option>
+      </select>
+      <input id="size" type="range" min="110" max="300" value="165" />
+      <span id="count"></span>
+    </div>
+    <div id="grid"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

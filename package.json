@@ -1,0 +1,24 @@
+{
+  "name": "cover-grid-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cover Grid zum Nachbauen – 10.000 Cover flüssig in voller Breite mit der GuiExpert Table",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "covers": "node scripts/make-covers.mjs",
+    "step": "node scripts/step.mjs",
+    "check": "tsc && tsc -p tsconfig.steps.json"
+  },
+  "dependencies": {
+    "@guiexpert/demo-table-models": "1.1.116",
+    "@guiexpert/table": "1.1.116"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}
