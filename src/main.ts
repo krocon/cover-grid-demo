@@ -17,13 +17,18 @@ const RATIO = 220 / 165;   // Cover im Format 3 : 4
 const CAPTION = 44;        // zwei Textzeilen
 const wanted = 165;        // Wunschbreite einer Kachel
 let selected: Cover | undefined;
+let query = "";
 const height = wanted * RATIO + CAPTION;
 
 const model = CoverGridFactory.createCoverGridModel(
   covers, createRenderer(c => c === selected),
   wanted, height);
-const options =
-  CoverGridFactory.createCoverGridDefaultOptions(height);
+const options = {
+  ...CoverGridFactory.createCoverGridDefaultOptions(height),
+  externalFilterFunction: (c: Cover) =>
+    `${c.title} ${c.author} ${c.genre}`
+      .toLowerCase().includes(query),
+};
 
 const listener = new EventAdapter();
 listener.onMouseClicked = evt => {
@@ -53,9 +58,23 @@ function fillWidth() {
   body.coverHeight =
     Math.round(body.coverWidth * RATIO) + CAPTION;
   api.repaintHard();
-  console.log(`${cols} Spalten à ${body.coverWidth} px`);
 }
 new ResizeObserver(() => {
   api.recalcColumnWidths();
   fillWidth();
 }).observe(host);
+
+const search =
+  document.querySelector<HTMLInputElement>("#search")!;
+const count =
+  document.querySelector<HTMLSpanElement>("#count")!;
+function showCount() {
+  const n = model.bodyModel.filteredItems.length;
+  count.textContent = `${n} Treffer`;
+}
+search.addEventListener("input", () => {
+  query = search.value.trim().toLowerCase();
+  api.externalFilterChanged();
+  showCount();
+});
+showCount();
