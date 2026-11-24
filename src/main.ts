@@ -25,6 +25,12 @@ const options =
   CoverGridFactory.createCoverGridDefaultOptions(height);
 
 const listener = new EventAdapter();
+listener.onMouseClicked = evt => {
+  const c = model.bodyModel.getValueAt(
+    evt.rowIndex, evt.columnIndex);
+  if (!c) return;
+  console.log(`Klick: ${c.title} (${evt.clickCount}×)`);
+};
 
 const host =
   document.querySelector<HTMLDivElement>("#grid")!;
