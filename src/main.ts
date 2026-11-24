@@ -6,8 +6,8 @@ import {
   SimpleDomService,
   TableScope,
 } from "@guiexpert/table";
-import { BookCoverRenderer } from "@guiexpert/demo-table-models";
 import type { Cover } from "./cover";
+import { createRenderer } from "./renderer";
 
 const res = await fetch("/covers.json");
 const covers: Cover[] = await res.json();
@@ -18,7 +18,7 @@ const wanted = 165;        // Wunschbreite einer Kachel
 const height = wanted * RATIO;
 
 const model = CoverGridFactory.createCoverGridModel(
-  covers, new BookCoverRenderer(),
+  covers, createRenderer(),
   wanted, height);
 const options =
   CoverGridFactory.createCoverGridDefaultOptions(height);
