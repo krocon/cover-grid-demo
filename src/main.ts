@@ -16,10 +16,11 @@ console.log(`${covers.length} Cover geladen`);
 const RATIO = 220 / 165;   // Cover im Format 3 : 4
 const CAPTION = 44;        // zwei Textzeilen
 const wanted = 165;        // Wunschbreite einer Kachel
+let selected: Cover | undefined;
 const height = wanted * RATIO + CAPTION;
 
 const model = CoverGridFactory.createCoverGridModel(
-  covers, createRenderer(),
+  covers, createRenderer(c => c === selected),
   wanted, height);
 const options =
   CoverGridFactory.createCoverGridDefaultOptions(height);
@@ -29,7 +30,9 @@ listener.onMouseClicked = evt => {
   const c = model.bodyModel.getValueAt(
     evt.rowIndex, evt.columnIndex);
   if (!c) return;
-  console.log(`Klick: ${c.title} (${evt.clickCount}×)`);
+  selected = c;
+  console.log(`Gewählt: ${c.title}`);
+  api.repaint();
 };
 
 const host =

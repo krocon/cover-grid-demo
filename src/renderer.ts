@@ -2,7 +2,9 @@ import type { CellRendererIf } from "@guiexpert/table";
 import { BookCoverRenderer } from "@guiexpert/demo-table-models";
 import type { Cover } from "./cover";
 
-export function createRenderer(): CellRendererIf {
+export function createRenderer(
+  isSelected: (c: Cover) => boolean,
+): CellRendererIf {
   const covers = new BookCoverRenderer();
   return {
     render(cell, row, col, area, model, value) {
@@ -10,6 +12,7 @@ export function createRenderer(): CellRendererIf {
       if (!c) return undefined;
       const tile = document.createElement("div");
       tile.className = "tile";
+      if (isSelected(c)) tile.classList.add("selected");
       const pic = document.createElement("div");
       pic.className = "pic";
       covers.render(pic, row, col, area, model, c);

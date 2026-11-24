@@ -27,3 +27,7 @@ body {
   font-size: 12px;
   color: #6b7280;
 }
+.tile.selected {
+  outline: 3px solid #ec4899;
+  outline-offset: -3px;
+}
