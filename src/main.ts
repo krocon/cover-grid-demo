@@ -15,7 +15,7 @@ console.log(`${covers.length} Cover geladen`);
 
 const RATIO = 220 / 165;   // Cover im Format 3 : 4
 const CAPTION = 44;        // zwei Textzeilen
-const wanted = 165;        // Wunschbreite einer Kachel
+let wanted = 165;          // Wunschbreite einer Kachel
 let selected: Cover | undefined;
 let query = "";
 const height = wanted * RATIO + CAPTION;
@@ -78,3 +78,23 @@ search.addEventListener("input", () => {
   showCount();
 });
 showCount();
+
+const de = new Intl.Collator("de", { numeric: true });
+const SORTS = {
+  id: (a: Cover, b: Cover) => a.id - b.id,
+  title: (a: Cover, b: Cover) =>
+    de.compare(a.title, b.title),
+  year: (a: Cover, b: Cover) => b.year - a.year,
+};
+const sort =
+  document.querySelector<HTMLSelectElement>("#sort")!;
+sort.addEventListener("change", () => {
+  api.sort(SORTS[sort.value as keyof typeof SORTS]);
+});
+
+const size =
+  document.querySelector<HTMLInputElement>("#size")!;
+size.addEventListener("input", () => {
+  wanted = Number(size.value);
+  fillWidth();
+});

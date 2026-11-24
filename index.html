@@ -8,6 +8,12 @@
   <body>
     <div class="bar">
       <input id="search" type="search" placeholder="Suchen …" />
+      <select id="sort">
+        <option value="id">Sammlung</option>
+        <option value="title">Titel</option>
+        <option value="year">Neueste zuerst</option>
+      </select>
+      <input id="size" type="range" min="110" max="300" value="165" />
       <span id="count"></span>
     </div>
     <div id="grid"></div>
