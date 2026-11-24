@@ -14,8 +14,9 @@ const covers: Cover[] = await res.json();
 console.log(`${covers.length} Cover geladen`);
 
 const RATIO = 220 / 165;   // Cover im Format 3 : 4
+const CAPTION = 44;        // zwei Textzeilen
 const wanted = 165;        // Wunschbreite einer Kachel
-const height = wanted * RATIO;
+const height = wanted * RATIO + CAPTION;
 
 const model = CoverGridFactory.createCoverGridModel(
   covers, createRenderer(),
@@ -37,7 +38,7 @@ function fillWidth() {
     Math.floor(body.width / wanted));
   body.coverWidth = Math.floor(body.width / cols);
   body.coverHeight =
-    Math.round(body.coverWidth * RATIO);
+    Math.round(body.coverWidth * RATIO) + CAPTION;
   api.repaintHard();
   console.log(`${cols} Spalten à ${body.coverWidth} px`);
 }

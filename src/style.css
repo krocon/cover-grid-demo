@@ -5,3 +5,25 @@ body {
 #grid {
   height: 100vh;
 }
+.tile {
+  height: 100%;
+}
+.tile .pic {
+  height: calc(100% - 44px);
+}
+.tile .title,
+.tile .sub {
+  line-height: 19px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 6px;
+}
+.tile .title {
+  font-size: 13px;
+  font-weight: 600;
+}
+.tile .sub {
+  font-size: 12px;
+  color: #6b7280;
+}
